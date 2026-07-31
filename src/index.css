@@ -304,7 +304,7 @@ input[type="range"].hp-range::-moz-range-thumb:hover {
  * Transitions are NOT disabled under prefers-reduced-motion (recording demo).
  */
 .loop-move {
-  transition: transform 1600ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
 }
 .loop-move--snap {
