@@ -13,6 +13,10 @@ npm run dev
 
 ## Controls
 
+Press a number once to **select** that pack (static original). Press the
+**same number again** to **start** the animation. Press it a third time to
+freeze back to the static cue (handy for re-takes).
+
 | Key | Pack |
 |-----|------|
 | `1` | Parakeet |
@@ -22,7 +26,7 @@ npm run dev
 | `5` | Signac |
 | `6` | Yorkie |
 | `7` | Fuji |
-| `R` | Restart |
+| `R` | Start / restart playback |
 | `Esc` | Idle |
 
 ## Tests

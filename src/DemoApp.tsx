@@ -5,7 +5,8 @@
  * 3) Pruned fades in on the right with pruned/kept overlay
  * 4) Stay side-by-side: left pulses original ↔ attention; right stays pruned
  *
- * Keys: 1 / 2 / 3 pack, R restart, Esc idle.
+ * Keys: number once selects a pack (static), same number again starts
+ * the animation. R restarts, Esc idle.
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
@@ -132,6 +133,8 @@ export default function DemoApp() {
   const [ready, setReady] = useState(false);
 
   const [active, setActive] = useState<DemoPack | null>(null);
+  /** False = pack armed/static (recording cue); true = animation running. */
+  const [playing, setPlaying] = useState(false);
   /** Original at center (true) vs left column (false). */
   const [atCenter, setAtCenter] = useState(true);
   /** CSS transition only while sliding center → left. */
@@ -183,10 +186,11 @@ export default function DemoApp() {
         if (!alive) return;
         setPackCache(loaded);
         setReady(true);
+        // Arm first pack static — press its number again to start.
         const first = entries[0] && loaded[entries[0].id];
         if (first) {
           setActive(first);
-          setPlayEpoch((n) => n + 1);
+          setPlaying(false);
         }
       } catch (e) {
         if (alive) {
@@ -212,23 +216,41 @@ export default function DemoApp() {
     abortRef.current?.abort();
     abortRef.current = null;
     hardReset();
+    setPlaying(false);
     setActive(null);
   }, [hardReset]);
 
-  const startPackAtIndex = useCallback(
+  /** Select a pack and freeze on the centered original (no animation). */
+  const selectPackAtIndex = useCallback(
     (index: number) => {
       const entry = manifest[index];
       if (!entry) return;
       const pack = packCache[entry.id];
       if (!pack) return;
       abortRef.current?.abort();
+      abortRef.current = null;
       setLoadError(null);
       hardReset();
+      setPlaying(false);
       setActive(pack);
-      setPlayEpoch((n) => n + 1);
     },
     [manifest, packCache, hardReset]
   );
+
+  const startPlayback = useCallback(() => {
+    if (!active) return;
+    setPlaying(true);
+    setPlayEpoch((n) => n + 1);
+  }, [active]);
+
+  /** Stop animation but keep the pack armed on the static original. */
+  const armCurrentPack = useCallback(() => {
+    if (!active) return;
+    abortRef.current?.abort();
+    abortRef.current = null;
+    hardReset();
+    setPlaying(false);
+  }, [active, hardReset]);
 
   const animateHeatReveal = async (
     from: number,
@@ -253,7 +275,7 @@ export default function DemoApp() {
   };
 
   useEffect(() => {
-    if (!active) return;
+    if (!active || !playing) return;
 
     const md = active.result.metadata;
     const heatN =
@@ -326,7 +348,7 @@ export default function DemoApp() {
     return () => {
       ac.abort();
     };
-  }, [active, playEpoch, hardReset]);
+  }, [active, playEpoch, playing, hardReset]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -338,13 +360,21 @@ export default function DemoApp() {
       if (packIdx != null) {
         e.preventDefault();
         if (!ready) return;
-        startPackAtIndex(packIdx);
+        const entry = manifest[packIdx];
+        if (!entry) return;
+        // Same pack: start if armed, re-arm (static) if already playing.
+        if (active?.id === entry.id) {
+          if (playing) armCurrentPack();
+          else startPlayback();
+          return;
+        }
+        selectPackAtIndex(packIdx);
         return;
       }
       if (e.key.toLowerCase() === "r") {
         if (!active) return;
         e.preventDefault();
-        setPlayEpoch((n) => n + 1);
+        startPlayback();
         return;
       }
       if (e.key === "Escape") {
@@ -354,7 +384,16 @@ export default function DemoApp() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [ready, active, startPackAtIndex, stopPlayback]);
+  }, [
+    ready,
+    active,
+    playing,
+    manifest,
+    selectPackAtIndex,
+    startPlayback,
+    armCurrentPack,
+    stopPlayback,
+  ]);
 
   const imageUrl = active?.image ?? null;
   const md = (active?.result?.metadata ?? null) as PruningMetadata | null;
