@@ -23,6 +23,7 @@ PACKS = (
     "yorkie",
     "fuji",
     "turtle",
+    "alps",
 )
 LABELS = {
     "parakeet": "Parakeet",
@@ -33,6 +34,7 @@ LABELS = {
     "yorkie": "Yorkie",
     "fuji": "Fuji",
     "turtle": "Turtle",
+    "alps": "Alps",
 }
 ROOT = Path(__file__).resolve().parent
 

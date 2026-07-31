@@ -47,6 +47,12 @@
       "label": "Turtle",
       "image": "/demo-packs/turtle/image.jpg",
       "pack": "/demo-packs/turtle/pack.json"
+    },
+    {
+      "id": "alps",
+      "label": "Alps",
+      "image": "/demo-packs/alps/image.jpg",
+      "pack": "/demo-packs/alps/pack.json"
     }
   ]
 }

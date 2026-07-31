@@ -36,6 +36,7 @@ const PACK_KEYS: Record<string, number> = {
   "6": 5,
   "7": 6,
   "8": 7,
+  "9": 8,
 };
 
 type PackManifestEntry = {
