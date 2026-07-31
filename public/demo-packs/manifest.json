@@ -1,0 +1,46 @@
+{
+  "packs": [
+    {
+      "id": "parakeet",
+      "label": "Parakeet",
+      "image": "/demo-packs/parakeet/image.jpg",
+      "pack": "/demo-packs/parakeet/pack.json"
+    },
+    {
+      "id": "surfer",
+      "label": "Surfer",
+      "image": "/demo-packs/surfer/image.jpg",
+      "pack": "/demo-packs/surfer/pack.json"
+    },
+    {
+      "id": "volcano",
+      "label": "Volcano",
+      "image": "/demo-packs/volcano/image.jpg",
+      "pack": "/demo-packs/volcano/pack.json"
+    },
+    {
+      "id": "chefchaouen",
+      "label": "Chefchaouen",
+      "image": "/demo-packs/chefchaouen/image.jpg",
+      "pack": "/demo-packs/chefchaouen/pack.json"
+    },
+    {
+      "id": "signac",
+      "label": "Signac",
+      "image": "/demo-packs/signac/image.jpg",
+      "pack": "/demo-packs/signac/pack.json"
+    },
+    {
+      "id": "yorkie",
+      "label": "Yorkie",
+      "image": "/demo-packs/yorkie/image.jpg",
+      "pack": "/demo-packs/yorkie/pack.json"
+    },
+    {
+      "id": "fuji",
+      "label": "Fuji",
+      "image": "/demo-packs/fuji/image.jpg",
+      "pack": "/demo-packs/fuji/pack.json"
+    }
+  ]
+}

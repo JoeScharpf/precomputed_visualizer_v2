@@ -1,0 +1,8 @@
+node_modules
+.DS_Store
+*.local
+tsconfig.tsbuildinfo
+.vercel
+dist
+.pytest_cache
+__pycache__
