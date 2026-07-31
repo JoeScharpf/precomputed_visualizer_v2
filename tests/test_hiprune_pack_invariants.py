@@ -27,6 +27,7 @@ PACK_IDS = (
     "yorkie",
     "fuji",
     "turtle",
+    "alps",
 )
 
 

@@ -27,6 +27,7 @@ freeze back to the static cue (handy for re-takes).
 | `6` | Yorkie |
 | `7` | Fuji |
 | `8` | Turtle |
+| `9` | Alps |
 | `R` | Start / restart playback |
 | `Esc` | Idle |
 
