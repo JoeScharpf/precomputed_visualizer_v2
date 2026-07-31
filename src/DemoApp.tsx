@@ -16,11 +16,12 @@ import type { InferResult, ModelKey, PruningMetadata } from "./lib/types";
 const CENTER_HOLD_MS = 1800;
 /** Slide duration — keep in sync with `.loop-move` in index.css */
 const SLIDE_MS = 800;
-const PRUNED_FADE_MS = 1100;
-const HEAT_REVEAL_MS = 1600;
-const PRUNED_REVEAL_MS = 1400;
+/** Pruned panel fade — keep in sync with `.loop-fade` in index.css */
+const PRUNED_FADE_MS = 600;
+const HEAT_REVEAL_MS = 900;
+const PRUNED_REVEAL_MS = 750;
 /** Brief hold at full heatmap / plain original while pulsing. */
-const HEAT_PULSE_HOLD_MS = 1800;
+const HEAT_PULSE_HOLD_MS = 1200;
 const PANEL_MAX_H = 480;
 const PANEL_GAP = 32;
 
