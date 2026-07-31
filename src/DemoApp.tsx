@@ -13,7 +13,9 @@ import type { ReactNode } from "react";
 import { OverlayCanvas } from "./ImageCompare";
 import type { InferResult, ModelKey, PruningMetadata } from "./lib/types";
 
-const CENTER_HOLD_MS = 1800;
+/** Hold on centered original before slide. Armed packs already show this
+ *  statically, so keep near-zero for an instant start on the 2nd keypress. */
+const CENTER_HOLD_MS = 0;
 /** Slide duration — keep in sync with `.loop-move` in index.css */
 const SLIDE_MS = 800;
 /** Pruned panel fade — keep in sync with `.loop-fade` in index.css */
@@ -300,7 +302,9 @@ export default function DemoApp() {
         await nextFrame();
         if (signal.aborted) return;
 
-        await sleep(CENTER_HOLD_MS, signal);
+        if (CENTER_HOLD_MS > 0) {
+          await sleep(CENTER_HOLD_MS, signal);
+        }
 
         setSlideOn(true);
         await nextFrame();
