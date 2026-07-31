@@ -26,6 +26,7 @@ freeze back to the static cue (handy for re-takes).
 | `5` | Signac |
 | `6` | Yorkie |
 | `7` | Fuji |
+| `8` | Turtle |
 | `R` | Start / restart playback |
 | `Esc` | Idle |
 

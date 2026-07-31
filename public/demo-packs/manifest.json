@@ -41,6 +41,12 @@
       "label": "Fuji",
       "image": "/demo-packs/fuji/image.jpg",
       "pack": "/demo-packs/fuji/pack.json"
+    },
+    {
+      "id": "turtle",
+      "label": "Turtle",
+      "image": "/demo-packs/turtle/image.jpg",
+      "pack": "/demo-packs/turtle/pack.json"
     }
   ]
 }

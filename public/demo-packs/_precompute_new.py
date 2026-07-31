@@ -22,6 +22,7 @@ PACKS = (
     "signac",
     "yorkie",
     "fuji",
+    "turtle",
 )
 LABELS = {
     "parakeet": "Parakeet",
@@ -31,6 +32,7 @@ LABELS = {
     "signac": "Signac",
     "yorkie": "Yorkie",
     "fuji": "Fuji",
+    "turtle": "Turtle",
 }
 ROOT = Path(__file__).resolve().parent
 
@@ -81,7 +83,12 @@ def infer(image_path: Path) -> dict:
 
 
 def main() -> int:
-    for pack_id in PACKS:
+    wanted = set(sys.argv[1:]) if len(sys.argv) > 1 else None
+    packs = [p for p in PACKS if wanted is None or p in wanted]
+    if not packs:
+        print(f"no packs matched {sorted(wanted or [])}", file=sys.stderr)
+        return 1
+    for pack_id in packs:
         img = ROOT / pack_id / "image.jpg"
         if not img.exists():
             print(f"missing {img}", file=sys.stderr)
